@@ -1,23 +1,39 @@
 [package]
-name = "casper-velocity-contracts"
+name = "casper_velocity_contracts"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-odra = { version = "1.0", features = ["casper-contract"] }
-serde = { version = "1.0", features = ["derive"] }
+odra = { version = "2.4.0", features = [], default-features = false }
 
-[lib]
-crate-type = ["cdylib"]
+[dev-dependencies]
+odra-test = { version = "2.4.0", features = [], default-features = false }
 
-[[bin]]
-name = "liquid_staking_contract"
-path = "bin/liquid_staking.rs"
+[build-dependencies]
+odra-build = { version = "2.4.0", features = [], default-features = false }
 
-[[bin]]
-name = "yield_aggregator_contract"
-path = "bin/yield_aggregator.rs"
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+odra-build = { version = "2.4.0", features = [], default-features = false }
+odra-cli = { version = "2.4.0", features = [], default-features = false }
 
 [[bin]]
-name = "synthetic_stablecoin_contract"
-path = "bin/synthetic_stablecoin.rs"
+name = "casper_velocity_contracts_build_contract"
+path = "bin/build_contract.rs"
+test = false
+
+[[bin]]
+name = "casper_velocity_contracts_build_schema"
+path = "bin/build_schema.rs"
+test = false
+
+[[bin]]
+name = "casper_velocity_contracts_cli"
+path = "bin/cli.rs"
+test = false
+
+[profile.release]
+codegen-units = 1
+lto = true
+
+[profile.dev.package."*"]
+opt-level = 3
