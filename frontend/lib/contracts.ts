@@ -1,49 +1,50 @@
 /**
- * LiquidMesh Contract Configuration
- * Deployed and verified contracts on Somnia Testnet
+ * ArbShield Contract Configuration
+ * Deployed and verified contracts on Arbitrum Sepolia
  */
 
 export const CONTRACTS = {
-  WrappedSTT: "0x9e1B4FbB45F30b0628e4C406A6F4Eec1fadb54E1" as const,
-  MockUSDC: "0x758dA18F8424f637f788a0CD0DAF8407069D380b" as const,
-  LiquidityVault: "0x28205BB97e1BEe146E0b095D3cf62433D9bAb47d" as const,
-  AgentExecutor: "0x5e639e2F345577514aFA0159AEdDf0A832e4139f" as const,
+  // Stylus Rust Verifier Contract (ZK Proof Verification)
+  ZKVerifier: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  
+  // Compliance Registry (stores verified attributes)
+  ComplianceRegistry: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  
+  // Mock RWA Token (for demo BUIDL portal)
+  MockBUIDL: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  
+  // Passkey Verifier (RIP-7212 precompile)
+  PasskeyVerifier: "0x0000000000000000000000000000000000000100" as const, // RIP-7212 address
 } as const;
 
 /**
- * Token configurations
+ * Compliance Attribute Types
  */
-export const TOKENS = {
-  WSTT: {
-    address: CONTRACTS.WrappedSTT,
-    symbol: "wSTT",
-    decimals: 18,
-    name: "Wrapped STT",
-  },
-  USDC: {
-    address: CONTRACTS.MockUSDC,
-    symbol: "USDC",
-    decimals: 6,
-    name: "Mock USDC",
-  },
+export const COMPLIANCE_ATTRIBUTES = {
+  CREDIT_SCORE: "credit_score",
+  ACCREDITED_INVESTOR: "accredited_investor",
+  KYC_VERIFIED: "kyc_verified",
+  US_PERSON: "us_person",
+  AGE_VERIFICATION: "age_verification",
 } as const;
 
 /**
- * Somnia Testnet Chain Configuration for Wagmi/Viem
+ * Arbitrum Sepolia Chain Configuration for Wagmi/Viem
  */
-export const SOMNIA_TESTNET = {
-  id: 50312,
-  name: "Somnia Testnet",
-  network: "somnia-testnet",
-  nativeCurrency: { name: "STT", symbol: "STT", decimals: 18 },
+export const ARBITRUM_SEPOLIA = {
+  id: 421614,
+  name: "Arbitrum Sepolia",
+  network: "arbitrum-sepolia",
+  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://dream-rpc.somnia.network"] },
-    public: { http: ["https://dream-rpc.somnia.network"] },
+    default: { http: ["https://sepolia-rollup.arbitrum.io/rpc"] },
+    public: { http: ["https://sepolia-rollup.arbitrum.io/rpc"] },
   },
   blockExplorers: {
     default: {
-      name: "Shannon Explorer",
-      url: "https://shannon-explorer.somnia.network",
+      name: "Arbiscan",
+      url: "https://sepolia.arbiscan.io",
     },
   },
+  testnet: true,
 } as const;

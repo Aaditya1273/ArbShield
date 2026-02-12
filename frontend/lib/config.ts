@@ -1,21 +1,21 @@
 import { createConfig } from "@privy-io/wagmi";
 import { http } from "wagmi";
 import { env } from "@/env";
-import { SOMNIA_TESTNET } from "@/lib/contracts";
+import { ARBITRUM_SEPOLIA } from "@/lib/contracts";
 
 // Dynamic chain selection based on environment
 export const getDefaultChain = () => {
-  return env.NEXT_PUBLIC_CHAIN_ID === "50312" ? SOMNIA_TESTNET : SOMNIA_TESTNET;
+  return env.NEXT_PUBLIC_CHAIN_ID === "421614" ? ARBITRUM_SEPOLIA : ARBITRUM_SEPOLIA;
 };
 
 // Chain configuration
-export const chains = [SOMNIA_TESTNET];
-export const supportedChains = [SOMNIA_TESTNET];
+export const chains = [ARBITRUM_SEPOLIA];
+export const supportedChains = [ARBITRUM_SEPOLIA];
 
 // Wagmi configuration
 export const wagmiConfig = createConfig({
-  chains: [SOMNIA_TESTNET],
+  chains: [ARBITRUM_SEPOLIA],
   transports: {
-    [SOMNIA_TESTNET.id]: http(SOMNIA_TESTNET.rpcUrls.default.http[0]),
+    [ARBITRUM_SEPOLIA.id]: http(ARBITRUM_SEPOLIA.rpcUrls.default.http[0]),
   },
 });
