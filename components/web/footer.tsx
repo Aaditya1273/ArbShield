@@ -6,7 +6,7 @@ const links = [
     items: [
       {
         title: "Twitter / X",
-        href: "https://x.com/liquidmesh_fi",
+        href: "https://x.com/iocryposto1273",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -61,15 +61,15 @@ export default function FooterSection() {
                   <div className="flex items-center gap-2">
                     <img
                       src="/icon.png"
-                      alt="LiquidMesh"
+                      alt="ArbShield"
                       className="h-6 w-6 rounded-full"
                     />
-                    <span className="text-xl font-bold">LiquidMesh</span>
+                    <span className="text-xl font-bold">ArbShield</span>
                   </div>
                 </Link>
 
                 <p className="text-muted-foreground text-base">
-                  © {new Date().getFullYear()} LiquidMesh. All rights reserved.
+                  © {new Date().getFullYear()} ArbShield. All rights reserved.
                 </p>
               </div>
 

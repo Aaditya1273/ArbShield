@@ -1,12 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { LavaLamp } from "@/components/ui/fluid-blob";
-import { env } from "@/env";
 import { HeroHeader } from "@/components/web/header";
+import { WalletConnect } from "@/components/wallet-connect";
+import { useAccount } from "wagmi";
+import { useEffect } from "react";
 
 export default function Hero() {
+  const router = useRouter();
+  const { isConnected } = useAccount();
+
+  // Redirect to /verify when wallet is connected
+  useEffect(() => {
+    if (isConnected) {
+      router.push("/verify");
+    }
+  }, [isConnected, router]);
+
   return (
     <>
       <HeroHeader />
@@ -22,15 +33,8 @@ export default function Hero() {
           <p className="mt-4 text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
           ArbShield is a privacy-preserving compliance verification engine powered by Stylus Rust — enabling institutions to verify user attributes using zero-knowledge proofs without revealing sensitive data on Arbitrum.
           </p>
-          <div className="mt-6">
-            <Button
-              asChild
-              size="lg"
-              variant="gradient"
-              className="px-8 py-3 rounded-md text-base font-medium"
-            >
-              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">Launch ArbShield</Link>
-            </Button>
+          <div className="mt-6 scale-110">
+            <WalletConnect />
           </div>
         </div>
       </section>

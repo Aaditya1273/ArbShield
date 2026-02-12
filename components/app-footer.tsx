@@ -8,16 +8,16 @@ export default function AppFooter() {
 
 			<div className="container mx-auto flex items-center justify-between gap-4 px-4 sm:h-16">
 				<Link
-					href="https://liquidmeshfi.xyz"
+					href="https://ArbShield.xyz"
 					target="_blank"
 					rel="noreferrer"
 					className="text-muted-foreground text-left text-sm leading-loose hover:underline"
 				>
-					LiquidMesh
+					ArbShield
 				</Link>
 				<div className="flex items-center gap-8">
 					<Link
-						href="https://docs.liquidmeshfi.xyz"
+						href="https://docs.ArbShield.xyz"
 						target="_blank"
 						rel="noreferrer"
 						className="text-muted-foreground hover:text-foreground transition-colors"

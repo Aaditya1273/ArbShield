@@ -166,25 +166,36 @@ arbshield/
 
 ### Prerequisites
 - Node.js 18+
-- Bun
-- Rust + cargo
-- Foundry
+- npm or bun
+- Rust + cargo (for contracts)
+- Foundry (for contracts)
 
 ### 1. Frontend Setup
 
 ```bash
 # Install dependencies
-bun install
+npm install
 
 # Configure environment
 cp .env.example .env.local
-# Add your WalletConnect Project ID
+
+# IMPORTANT: Get your FREE WalletConnect Project ID
+# 1. Go to https://cloud.walletconnect.com
+# 2. Create a free account (takes 2 minutes)
+# 3. Create a new project
+# 4. Copy your Project ID
+# 5. Add it to .env.local:
+#    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id_here
+#
+# See SETUP_WALLETCONNECT.md for detailed instructions
 
 # Run development server
-bun dev
+npm run dev
 ```
 
 Open http://localhost:3000
+
+**Note**: The app will start with a placeholder WalletConnect ID, but wallet connections won't work until you add a real Project ID. See `SETUP_WALLETCONNECT.md` for a 2-minute setup guide.
 
 ### 2. Smart Contracts
 

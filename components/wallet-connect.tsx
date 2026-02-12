@@ -38,7 +38,7 @@ export function WalletConnect() {
                 return (
                   <Button
                     onClick={openConnectModal}
-                    variant="gradient"
+                    variant="default"
                     size="default"
                   >
                     Connect Wallet
@@ -84,7 +84,7 @@ export function WalletConnect() {
                     {chain.name}
                   </Button>
 
-                  <Button onClick={openAccountModal} variant="gradient" size="sm">
+                  <Button onClick={openAccountModal} variant="default" size="sm">
                     {account.displayName}
                   </Button>
                 </div>

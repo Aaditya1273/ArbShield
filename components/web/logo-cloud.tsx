@@ -4,19 +4,17 @@ import { ProgressiveBlur } from "../ui/progressive-blur";
 export default function LogoCloud() {
   const protocols = [
     { name: "Arbitrum", src: "/protocols/arbitrum.png" },
-    { name: "Stylus", src: "/protocols/stylus.png" },
-    { name: "Alchemy", src: "/protocols/alchemy.png" },
-    { name: "OpenZeppelin", src: "/protocols/openzeppelin.png" },
-    { name: "Privy", src: "/protocols/privy.png" },
-    { name: "Arbitrum", src: "/protocols/arbitrum.png" },
-
-    { name: "Stylus", src: "/protocols/stylus.png" },
-
-    { name: "Privy", src: "/protocols/privy.png" },
-    { name: "Arbitrum", src: "/protocols/arbitrum.png" },
-    { name: "Alchemy", src: "/protocols/alchemy.png" },
-    { name: "OpenZeppelin", src: "/protocols/openzeppelin.png" },
-    { name: "Privy", src: "/protocols/privy.png" },
+    { name: "ArbX", src: "/protocols/arbix.png" },
+    { name: "QuickSwap", src: "/protocols/quickswap.png" },
+    { name: "Arbitrum Exchange", src: "/protocols/arbitrum-exchange.png" },
+    { name: "Arbitrum 2", src: "/protocols/arbitrum.png" },
+    { name: "ArbX 2", src: "/protocols/arbix.png" },
+    { name: "QuickSwap 2", src: "/protocols/quickswap.png" },
+    { name: "Arbitrum Exchange 2", src: "/protocols/arbitrum-exchange.png" },
+    { name: "Arbitrum 3", src: "/protocols/arbitrum.png" },
+    { name: "ArbX 3", src: "/protocols/arbix.png" },
+    { name: "QuickSwap 3", src: "/protocols/quickswap.png" },
+    { name: "Arbitrum Exchange 3", src: "/protocols/arbitrum-exchange.png" },
   ];
 
   return (
@@ -25,13 +23,13 @@ export default function LogoCloud() {
         <div className="flex flex-col items-center">
           <div className="mb-8 text-center">
             <h3 className="font-heading text-foreground text-2xl font-semibold tracking-tight">
-              Powered by
+              Built on Arbitrum Ecosystem
             </h3>
           </div>
           <div className="relative w-full py-6">
             <InfiniteSlider speedOnHover={20} speed={60} gap={80}>
-              {protocols.map((protocol) => (
-                <div key={protocol.name} className="flex">
+              {protocols.map((protocol, index) => (
+                <div key={`${protocol.name}-${index}`} className="flex">
                   <img
                     className="mx-auto h-8 w-fit opacity-60 transition-opacity hover:opacity-100"
                     src={protocol.src}

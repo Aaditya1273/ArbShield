@@ -11,7 +11,7 @@
     "format": "biome format --write",
     "check": "biome check --write",
     "typecheck": "tsc --noEmit",
-    "test:implementations": "node --loader ts-node/esm scripts/test-implementations.ts"
+    "test:implementations": "node scripts/test-implementations.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

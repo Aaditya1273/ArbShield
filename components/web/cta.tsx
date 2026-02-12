@@ -1,10 +1,22 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { LavaLamp } from "@/components/ui/fluid-blob";
-import { Button } from "../ui/button";
+import { WalletConnect } from "@/components/wallet-connect";
+import { useAccount } from "wagmi";
+import { useEffect } from "react";
 
 export function CallToAction() {
+  const router = useRouter();
+  const { isConnected } = useAccount();
+
+  // Redirect to /verify when wallet is connected
+  useEffect(() => {
+    if (isConnected) {
+      router.push("/verify");
+    }
+  }, [isConnected, router]);
+
   return (
     <section className="py-16 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -20,14 +32,7 @@ export function CallToAction() {
               Experience privacy-preserving compliance verification on Arbitrum with Stylus Rust.
             </p>
             <div className="mt-6">
-              <Button
-                asChild
-                size="lg"
-                variant="gradient"
-                className="px-8 py-3 rounded-md text-base font-medium"
-              >
-                <Link href="/app">Launch App</Link>
-              </Button>
+              <WalletConnect />
             </div>
           </div>
         </div>
