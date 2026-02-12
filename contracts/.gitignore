@@ -1,8 +1,23 @@
-.idea
-.vscode
-/target
-Cargo.lock
-.backend*
-.builder*
-/wasm
+node_modules
 .env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build outputs
+dist
+build
+

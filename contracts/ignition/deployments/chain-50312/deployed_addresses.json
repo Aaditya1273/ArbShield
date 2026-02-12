@@ -1,0 +1,6 @@
+{
+  "LiquidMeshModule#MockUSDC": "0xF5875F25ccEB2edDc57F218eaF1F71c5CF161f21",
+  "LiquidMeshModule#WrappedSTT": "0x7896B9A48690957f49973E1F8E19E7976BA4c929",
+  "LiquidMeshModule#LiquidityVault": "0xE86feD31B02D1C9B14772098F3b0Dde78dbAcc9E",
+  "LiquidMeshModule#AgentExecutor": "0x47E8e1031c066b9B51a56bDecFc5cF0c4935891c"
+}

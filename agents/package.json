@@ -1,0 +1,51 @@
+{
+	"name": "liquidmesh-agents",
+	"version": "1.0.0",
+	"description": "LiquidMesh multi-agent orchestration system for autonomous liquidity management on Somnia",
+	"type": "module",
+	"main": "src/index.ts",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts",
+		"start": "bun run src/index.ts",
+		"build": "bun build src/index.ts --outdir dist --target bun",
+		"test": "bun test",
+		"test:watch": "bun test --watch",
+		"test:coverage": "bun test --coverage",
+		"lint": "biome check",
+		"format": "biome format --write",
+		"check": "biome check --write",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@ai-sdk/openai": "^2.0.53",
+		"@supabase/supabase-js": "^2.76.1",
+		"ai": "^5.0.78",
+		"hono": "^4.6.12",
+		"openai": "^4.76.1",
+		"viem": "^2.38.4",
+		"zod": "^4.1.12"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.3.1",
+		"typescript": "^5.0.0"
+	},
+	"keywords": [
+		"somnia",
+		"defi",
+		"liquidity",
+		"agents",
+		"ai",
+		"automation",
+		"multi-agent",
+		"orchestration",
+		"clm",
+		"concentrated-liquidity"
+	],
+	"author": "LiquidMesh Team <me.samueldanso@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueldanso/liquidmesh-somnia-ai.git",
+		"directory": "agents"
+	}
+}

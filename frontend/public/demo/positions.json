@@ -1,0 +1,12 @@
+[
+  {
+    "token0Symbol": "wSTT",
+    "token1Symbol": "USDC",
+    "rangeLower": "-0.5%",
+    "rangeUpper": "+0.5%",
+    "liquidityUSD": 10000,
+    "apy": 14.2,
+    "feesEarnedUSD": 37.5,
+    "inRange": true
+  }
+]

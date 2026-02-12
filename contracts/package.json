@@ -1,0 +1,31 @@
+{
+	"name": "liquidmesh-contracts",
+	"version": "1.0.0",
+	"description": "LiquidMesh smart contracts for autonomous liquidity management on Somnia",
+	"main": "index.js",
+	"scripts": {
+		"compile": "hardhat compile",
+		"test": "hardhat test",
+		"deploy": "hardhat run scripts/deploy.ts --network somnia",
+		"verify": "hardhat verify --network somnia"
+	},
+	"dependencies": {
+		"@nomicfoundation/hardhat-toolbox": "^4.0.0",
+		"@openzeppelin/contracts": "^5.0.0",
+		"hardhat": "^2.19.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.0.0",
+		"typescript": "^5.0.0"
+	},
+	"keywords": [
+		"somnia",
+		"defi",
+		"liquidity",
+		"agents",
+		"ai",
+		"automation"
+	],
+	"author": "LiquidMesh Team",
+	"license": "MIT"
+}
