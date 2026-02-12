@@ -11,19 +11,25 @@ export default function AppHeader() {
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/icon.png"
-              alt="LiquidMesh"
+              alt="ArbShield"
               width={24}
               height={24}
               priority
               className="rounded-full"
             />
-            <span className="text-xl font-bold">LiquidMesh</span>
+            <span className="text-xl font-bold">ArbShield</span>
           </Link>
 
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
             <Link
-              href="/dashboard"
+              href="/verify"
+              className="relative text-muted-foreground hover:text-foreground transition-colors font-medium"
+            >
+              Verify
+            </Link>
+            <Link
+              href="/compliance"
               className="relative text-muted-foreground hover:text-foreground transition-colors font-medium"
             >
               Dashboard
