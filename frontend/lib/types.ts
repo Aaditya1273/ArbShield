@@ -1,5 +1,47 @@
-// Agent API Response Types
+// Compliance Verification API Response Types
 
+export interface ComplianceProof {
+  id: string;
+  userAddress: string;
+  attributeType: string; // "credit_score", "accredited_investor", etc.
+  proofData: string; // ZK proof hex string
+  verified: boolean;
+  timestamp: string;
+  gasUsed?: number;
+  verifierContract: string;
+}
+
+export interface ComplianceAttribute {
+  type: string;
+  description: string;
+  required: boolean;
+  verified: boolean;
+  verifiedAt?: string;
+}
+
+export interface UserComplianceStatus {
+  userAddress: string;
+  attributes: ComplianceAttribute[];
+  overallCompliant: boolean;
+  lastVerified: string;
+}
+
+export interface VerificationBenchmark {
+  operation: string;
+  gasUsed: number;
+  executionTime: number; // milliseconds
+  cached: boolean;
+  timestamp: string;
+}
+
+export interface RWAAccessStatus {
+  hasAccess: boolean;
+  requiredAttributes: string[];
+  missingAttributes: string[];
+  accessLevel: "none" | "basic" | "full";
+}
+
+// Legacy types (kept for backward compatibility during migration)
 export interface PoolMetrics {
   poolAddress: string;
   dex: string;

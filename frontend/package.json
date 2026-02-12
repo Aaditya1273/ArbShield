@@ -1,7 +1,7 @@
 {
-  "name": "liquidmesh-frontend",
+  "name": "arbshield-frontend",
   "version": "0.1.0",
-  "description": "LiquidMesh - Frontend",
+  "description": "ArbShield - Privacy-Preserving Compliance Verification on Arbitrum",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

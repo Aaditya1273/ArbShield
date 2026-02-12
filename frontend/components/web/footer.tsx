@@ -32,13 +32,13 @@ const links = [
     items: [
       {
         title: "Terms of Use",
-        href: "https://liquidmesh-somnia-ai.vercel.app/terms",
+        href: "https://arbshield.vercel.app/terms",
         target: "_blank",
         rel: "noopener noreferrer",
       },
       {
         title: "Privacy Policy",
-        href: "https://liquidmesh-somnia-ai.vercel.app/privacy",
+        href: "https://arbshield.vercel.app/privacy",
         target: "_blank",
         rel: "noopener noreferrer",
       },
@@ -106,8 +106,8 @@ export default function FooterSection() {
                   POWERED BY
                 </span>
                 <img
-                  src="/protocols/somnia.png"
-                  alt="Somnia"
+                  src="/protocols/arbitrum.png"
+                  alt="Arbitrum"
                   className="h-6 w-auto"
                 />
               </div>

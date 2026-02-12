@@ -22,8 +22,8 @@ export default function HowItWorksSection() {
               How It Works
             </h2>
             <p className="text-muted-foreground mb-12 mt-4 text-balance text-center text-lg">
-              Multi-agent AI orchestration that autonomously manages your
-              concentrated liquidity positions across Somnia DEXes.
+              Privacy-preserving compliance verification using Stylus Rust verifiers
+              and zero-knowledge proofs on Arbitrum for institutional RWAs.
             </p>
           </div>
           <div className="mt-16 space-y-12">
@@ -70,8 +70,8 @@ export default function HowItWorksSection() {
                   03 Executor Agent
                 </h3>
                 <p className="text-muted-foreground mt-3 text-balance">
-                  Prepares and signs transaction payloads for optimal strategy
-                  execution on Somnia, returning results and status updates.
+                  Verifies ZK proofs on-chain using Stylus Rust contracts,
+                  enabling privacy-preserving compliance checks on Arbitrum.
                 </p>
               </div>
             </div>
@@ -155,7 +155,7 @@ const ExecutorIllustration = () => {
       <div className="w-fit">
         <Zap className="size-3.5 text-[#6D6BFF]" />
         <p className="mt-2 line-clamp-2 text-sm">
-          Executing transactions on Somnia for optimal liquidity management
+          Verifying compliance proofs on Arbitrum with Stylus efficiency
         </p>
       </div>
       <div className="bg-white/5 -mx-3 -mb-3 mt-3 space-y-3 rounded-lg p-3 backdrop-blur">

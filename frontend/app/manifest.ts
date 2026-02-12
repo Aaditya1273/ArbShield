@@ -2,11 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+    name: "ArbShield - Privacy-Preserving Compliance Verification Engine for Institutional RWAs on Arbitrum",
     short_name:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance on Arbitrum",
     description:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance Verification Engine for Institutional RWAs on Arbitrum",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

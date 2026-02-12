@@ -16,11 +16,11 @@ export default function Hero() {
         </div>
         <div className="flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
-            Autonomous <br />
-            Liquidity Unlocked
+            Privacy-First <br />
+            Compliance Unlocked
           </h1>
           <p className="mt-4 text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-          LiquidMesh is a decentralized, non-custodial liquidity protocol powered by our multi-agent orchestration framework — enabling LPs to achieve maximum capital efficiency and superior risk-adjusted yields across Somnia.
+          ArbShield is a privacy-preserving compliance verification engine powered by Stylus Rust — enabling institutions to verify user attributes using zero-knowledge proofs without revealing sensitive data on Arbitrum.
           </p>
           <div className="mt-6">
             <Button
@@ -29,7 +29,7 @@ export default function Hero() {
               variant="gradient"
               className="px-8 py-3 rounded-md text-base font-medium"
             >
-              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">Launch AgentMesh</Link>
+              <Link href="/dashboard" target="_blank" rel="noopener noreferrer">Launch ArbShield</Link>
             </Button>
           </div>
         </div>

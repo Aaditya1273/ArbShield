@@ -3,19 +3,19 @@ import { ProgressiveBlur } from "../ui/progressive-blur";
 
 export default function LogoCloud() {
   const protocols = [
-    { name: "Somnia", src: "/protocols/somnia.png" },
-    { name: "Somnia Exchange", src: "/protocols/somnia-exchange.png" },
-    { name: "Somnex", src: "/protocols/somnex.png" },
+    { name: "Arbitrum", src: "/protocols/arbitrum.png" },
+    { name: "Stylus", src: "/protocols/stylus.png" },
+    { name: "Alchemy", src: "/protocols/alchemy.png" },
+    { name: "OpenZeppelin", src: "/protocols/openzeppelin.png" },
     { name: "Privy", src: "/protocols/privy.png" },
-    { name: "Somnia", src: "/protocols/somnia.png" },
-    { name: "Somnia Exchange", src: "/protocols/somnia-exchange.png" },
+    { name: "Arbitrum", src: "/protocols/arbitrum.png" },
 
-    { name: "QuickSwap", src: "/protocols/quickswap.png" },
+    { name: "Stylus", src: "/protocols/stylus.png" },
 
     { name: "Privy", src: "/protocols/privy.png" },
-    { name: "Somnia", src: "/protocols/somnia.png" },
-    { name: "Somnex", src: "/protocols/somnex.png" },
-    { name: "QuickSwap", src: "/protocols/quickswap.png" },
+    { name: "Arbitrum", src: "/protocols/arbitrum.png" },
+    { name: "Alchemy", src: "/protocols/alchemy.png" },
+    { name: "OpenZeppelin", src: "/protocols/openzeppelin.png" },
     { name: "Privy", src: "/protocols/privy.png" },
   ];
 

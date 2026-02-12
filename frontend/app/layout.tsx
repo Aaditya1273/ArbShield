@@ -18,13 +18,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance Verification on Arbitrum",
     template:
-      "%s | LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "%s | ArbShield - Privacy-Preserving Compliance on Arbitrum",
   },
   description:
-    "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
-  keywords: ["liquidmesh", "liquidmesh ai", "somnia", "concentrated liquidity"],
+    "ArbShield - Privacy-Preserving Compliance Verification Engine for Institutional RWAs on Arbitrum using Stylus Rust and ZK Proofs",
+  keywords: ["arbshield", "arbitrum", "stylus", "zk proofs", "compliance", "rwa", "privacy"],
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   alternates: {
     canonical: "/",
@@ -34,20 +34,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: env.NEXT_PUBLIC_APP_URL,
     title:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance Verification on Arbitrum",
     description:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance Verification Engine for Institutional RWAs on Arbitrum using Stylus Rust and ZK Proofs",
     siteName:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance on Arbitrum",
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
+      "ArbShield - Privacy-Preserving Compliance Verification on Arbitrum",
     description:
-      "LiquidMesh - The AI orchestration layer for concentrated liquidity on Somnia.",
-    site: "@liquidmesh",
-    creator: "@liquidmesh",
+      "ArbShield - Privacy-Preserving Compliance Verification Engine for Institutional RWAs on Arbitrum using Stylus Rust and ZK Proofs",
+    site: "@arbshield",
+    creator: "@arbshield",
   },
   robots: {
     index: true,

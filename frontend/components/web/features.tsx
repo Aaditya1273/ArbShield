@@ -10,11 +10,11 @@ export default function FeaturesSection() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 text-center">
           <h2 className="font-heading text-foreground text-4xl font-semibold tracking-tight">
-            AI Orchestration for Concentrated Liquidity
+            ZK-Powered Compliance for Institutional RWAs
           </h2>
           <p className="text-muted-foreground mt-4 text-balance text-lg max-w-2xl mx-auto">
-            Multi-agent AI orchestration that continuously optimizes your
-            concentrated liquidity positions across Somnia DEXes
+            Stylus Rust verifiers that enable privacy-preserving attribute verification
+            for institutional Real-World Assets on Arbitrum
           </p>
         </div>
         <div className="relative">
@@ -39,7 +39,7 @@ export default function FeaturesSection() {
                   </span>
                 </div>
                 <h2 className="mt-6 text-center text-3xl font-semibold font-heading tracking-tight">
-                  Maximum Capital Efficiency
+                  10x Gas Efficiency
                 </h2>
               </div>
             </LiquidGlassCard>
@@ -52,11 +52,11 @@ export default function FeaturesSection() {
               </div>
               <div className="relative z-10 mt-6 space-y-2 text-center">
                 <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white font-heading tracking-tight">
-                  Multi-Agent Orchestration
+                  Stylus Rust Verifiers
                 </h2>
                 <p className="text-foreground">
-                  Specialized AI agents (Watcher, Strategist, Executor)
-                  coordinate autonomously to optimize your liquidity positions.
+                  Native WASM execution with arkworks for Poseidon hashes at ~11.8k gas
+                  — 18x cheaper than Solidity for ZK proof verification.
                 </p>
               </div>
             </LiquidGlassCard>
@@ -65,21 +65,21 @@ export default function FeaturesSection() {
                 <div className="flex items-center justify-center space-x-4">
                   <div className="text-center">
                     <Zap className="size-8 text-[#6D6BFF] mx-auto mb-2" />
-                    <div className="text-sm font-semibold">Low Latency</div>
+                    <div className="text-sm font-semibold">RIP-7212</div>
                   </div>
                   <div className="text-center">
                     <Users className="size-8 text-[#6D6BFF] mx-auto mb-2" />
-                    <div className="text-sm font-semibold">Somnia Native</div>
+                    <div className="text-sm font-semibold">Orbit L3</div>
                   </div>
                 </div>
               </div>
               <div className="relative z-10 mt-14 space-y-2 text-center">
                 <h2 className="text-lg font-medium transition font-heading tracking-tight">
-                  Somnia Optimized
+                  Arbitrum Native
                 </h2>
                 <p className="text-foreground">
-                  Built specifically for Somnia's low-latency execution and
-                  integrated with Somnia DEXes for optimal performance.
+                  Built with ArbOS Dia precompiles for passkey auth and
+                  permissioned Orbit L3 for compliance-first environments.
                 </p>
               </div>
             </LiquidGlassCard>
@@ -94,12 +94,11 @@ export default function FeaturesSection() {
                   </div>
                   <div className="space-y-2">
                     <h2 className="group-hover:text-secondary-950 text-lg font-medium text-zinc-800 transition dark:text-white font-heading tracking-tight">
-                      Autonomous Management
+                      Privacy-Preserving Verification
                     </h2>
                     <p className="text-foreground">
-                      Fully automated liquidity optimization with zero manual
-                      intervention. Powered by specialized AI agents that
-                      continuously reason and execute strategies.
+                      Zero-knowledge proofs enable attribute verification (credit score,
+                      accreditation, KYC) without revealing sensitive data to anyone.
                     </p>
                   </div>
                 </div>
@@ -133,12 +132,11 @@ export default function FeaturesSection() {
                   </div>
                   <div className="space-y-2">
                     <h2 className="text-lg font-medium transition font-heading tracking-tight">
-                      Self-Custodial & On-Chain
+                      Institutional-Grade Security
                     </h2>
                     <p className="text-foreground">
-                      You maintain full control of your funds. No third-party
-                      custody, no withdrawal limits, fully on-chain and
-                      transparent.
+                      Permissioned Orbit L3 with proof-required sequencing.
+                      Compliant, auditable, and isolated from public chain risks.
                     </p>
                   </div>
                 </div>
@@ -146,7 +144,7 @@ export default function FeaturesSection() {
                   <div className="relative flex h-full flex-col justify-center space-y-6 py-6">
                     <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
                       <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-gradient-to-r from-[#34A4FF]/20 via-[#6D6BFF]/20 to-[#A855FF]/20 text-[#6D6BFF] border-[#6D6BFF]/30">
-                        On-Chain
+                        ZK Proofs
                       </span>
                       <div className="ring-background size-7 ring-4">
                         <div className="size-full rounded-full bg-gradient-to-br from-[#34A4FF]/20 to-[#A855FF]/20 flex items-center justify-center">
@@ -161,12 +159,12 @@ export default function FeaturesSection() {
                         </div>
                       </div>
                       <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-gradient-to-r from-[#34A4FF]/20 via-[#6D6BFF]/20 to-[#A855FF]/20 text-[#6D6BFF] border-[#6D6BFF]/30">
-                        Transparent
+                        Private
                       </span>
                     </div>
                     <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
                       <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm bg-gradient-to-r from-[#34A4FF]/20 via-[#6D6BFF]/20 to-[#A855FF]/20 text-[#6D6BFF] border-[#6D6BFF]/30">
-                        No Limits
+                        Compliant
                       </span>
                       <div className="ring-background size-7 ring-4">
                         <div className="size-full rounded-full bg-gradient-to-br from-[#34A4FF]/20 to-[#A855FF]/20 flex items-center justify-center">

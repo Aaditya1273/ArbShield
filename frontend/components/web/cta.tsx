@@ -17,7 +17,7 @@ export function CallToAction() {
               Join the Revolution
             </h1>
             <p className="mt-4 text-lg lg:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed">
-              Experience AI-powered concentrated liquidity management on Somnia.
+              Experience privacy-preserving compliance verification on Arbitrum with Stylus Rust.
             </p>
             <div className="mt-6">
               <Button
