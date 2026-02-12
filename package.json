@@ -10,7 +10,8 @@
     "lint": "biome check",
     "format": "biome format --write",
     "check": "biome check --write",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:implementations": "node --loader ts-node/esm scripts/test-implementations.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -43,6 +44,7 @@
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@react-three/fiber": "^9.4.0",
+    "@simplewebauthn/browser": "^10.0.0",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "^5.85.5",
     "class-variance-authority": "^0.7.1",
@@ -64,6 +66,7 @@
     "react-use-measure": "^2.1.7",
     "recharts": "2.15.4",
     "server-only": "^0.0.1",
+    "snarkjs": "^0.7.4",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "three": "^0.181.0",

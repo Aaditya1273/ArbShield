@@ -1,7 +1,7 @@
 # ArbShield
 **Privacy-Preserving Compliance Verification Engine for Institutional Real-World Assets (RWAs) on Arbitrum**
 
-**Deployed on**: Arbitrum Sepolia + Custom Permissioned "Compliance Orbit" L3  
+**Deployed on**: Arbitrum Sepolia  
 **Core Tech**: Stylus Rust (arkworks/Poseidon) + RIP-7212 Precompile + Stylus Cache Manager  
 **Hackathon**: Arbitrum Open House NYC Online Buildathon (Feb 2026)  
 **Builder**: Aaditya  
@@ -11,11 +11,13 @@
 
 ## 🎯 Introduction
 
-ArbShield is a generalized, on-chain privacy engine that enables institutions to verify user attributes (e.g., credit score range, accredited investor status, KYC claims, US person status) using zero-knowledge proofs **without revealing any sensitive data**.
+ArbShield is a **fully decentralized DApp** that enables institutions to verify user attributes (e.g., credit score range, accredited investor status, KYC claims, US person status) using zero-knowledge proofs **without revealing any sensitive data**.
 
-Built as a dedicated "Compliance Orbit" L3 with Stylus Rust at its core, ArbShield unifies the latest 2026 Arbitrum upgrades (Stylus, ArbOS Dia with RIP-7212, Stylus Cache Manager, and permissioned Orbit) into a single institutional-grade product.
+Built with Stylus Rust at its core, ArbShield leverages the latest 2026 Arbitrum upgrades (Stylus, ArbOS Dia with RIP-7212, Stylus Cache Manager) into a single institutional-grade product.
 
 **Vision**: "Wall Street is coming to Arbitrum, but privacy is the wall. ArbShield is the door."
+
+**Architecture**: Pure DApp - No backend servers, no databases, fully on-chain! 🚀
 
 ---
 
@@ -37,16 +39,16 @@ Result: $500M+ in Arbitrum USDC/DeFi liquidity remains "stuck" — unable to leg
 
 ArbShield solves this with a **privacy-first compliance engine**:
 
-1. **ZK-Proof Verification**: Users generate proofs off-chain (e.g., "credit score > 700" or "accredited investor") → submit to Stylus Rust contract → verified privately on-chain
-2. **Mock Institutional Portal**: A "BUIDL Portal" demo where users log in with biometric passkeys → generate proof → gain access to simulated RWA yield/collateral flows
-3. **Permissioned Compliance Orbit L3**: A custom Orbit chain where ArbShield acts as a gatekeeper — transactions are only sequenced if they include a valid proof
-4. **High-Performance Primitives**: Stylus-optimized Poseidon hashes, cached verifications for HFT-scale, and RIP-7212 for near-free passkey checks
+1. **ZK-Proof Verification**: Users generate proofs client-side → submit to Stylus Rust contract → verified privately on-chain
+2. **Biometric Authentication**: FaceID/TouchID login via RIP-7212 precompile
+3. **Compliance Dashboard**: Real-time verification tracking from blockchain
+4. **High-Performance Primitives**: Stylus-optimized Poseidon hashes, cached verifications for HFT-scale
 
 **User Flow**:
-- Institutional user opens web portal
-- Authenticates with FaceID/passkey (ArbOS Dia + RIP-7212)
-- Generates ZK proof for required attribute
-- Submits → ArbShield verifies (cached Stylus) → unlocks RWA access
+- Connect wallet with RainbowKit
+- Authenticate with FaceID/passkey (RIP-7212)
+- Generate ZK proof client-side
+- Submit → Stylus verifies → Compliance unlocked
 
 ---
 
@@ -57,7 +59,7 @@ ArbShield is the **first protocol to unify the full post-Bianca/Dia Arbitrum sta
 1. **Stylus (WASM via Bianca)**: Native Rust execution → Poseidon hashes at ~11.8k gas (18x cheaper than Solidity) → full ZK verifiers at ~200k gas vs 2.5M+ in EVM
 2. **ArbOS Dia + RIP-7212 Precompile**: 99% gas reduction for secp256r1 passkeys → biometric FaceID logins at pennies
 3. **Stylus Cache Manager (ArbOS 32+)**: ArbShield WASM cached in node memory → repeat verifications near-instant and even cheaper
-4. **Orbit Custom L3**: Dedicated permissioned chain with ArbShield as sequencer gatekeeper → "Compliance-First" regulated environment
+4. **Pure DApp Architecture**: No backend servers, no databases - fully decentralized!
 
 No other L2 combines these for institutional privacy at this efficiency.
 
@@ -78,15 +80,15 @@ No other L2 combines these for institutional privacy at this efficiency.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Frontend (Next.js 15)                 │
-│  • RainbowKit wallet connection                          │
+│              Frontend (Next.js 15 + RainbowKit)          │
+│  • Client-side ZK proof generation                       │
 │  • Passkey authentication UI                             │
-│  • ZK proof generation                                   │
+│  • Wagmi hooks for blockchain interaction                │
 └────────────────────┬────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────┐
-│              Smart Contracts (Arbitrum Sepolia)          │
+│         Smart Contracts (Arbitrum Sepolia)               │
 │  ┌──────────────────┐  ┌──────────────────┐            │
 │  │  ZKVerifier.sol  │  │ ComplianceReg.sol│            │
 │  │  (Wrapper)       │  │ (Registry)       │            │
@@ -98,27 +100,41 @@ No other L2 combines these for institutional privacy at this efficiency.
 │  │ (arkworks)       │       ~200k gas                   │
 │  └──────────────────┘                                   │
 └─────────────────────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────────────────────┐
+│              Arbitrum Blockchain                         │
+│  • All data stored on-chain                              │
+│  • No backend servers                                    │
+│  • No databases                                          │
+└─────────────────────────────────────────────────────────┘
 ```
+
+**Pure DApp = Frontend + Smart Contracts + Blockchain** ✅
 
 ---
 
 ## ✨ Key Features (MVP)
 
-- ✅ Live Stylus Rust verifier (arkworks for Groth16-style proofs)
-- ✅ Interactive verification portal with passkey login (RIP-7212)
+- ✅ **Real WebAuthn Passkey Authentication** - FaceID/TouchID/Windows Hello with RIP-7212 precompile (~980 gas)
+- ✅ **Real ZK Proof Generation** - snarkjs integration with Groth16 proof structure
+- ✅ **Stylus Rust Verifier** - arkworks for efficient on-chain verification (~200k gas)
+- ✅ **Interactive Verification Portal** - 3-step flow with real blockchain integration
+- ✅ **Compliance Dashboard** - Real-time stats and verification history
 - ✅ Compliance dashboard with gas benchmarks
 - ✅ Mock BUIDL token integration
-- ✅ Full test coverage
+- ✅ RainbowKit wallet integration
+- ✅ Fully decentralized (no backend/database)
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 15, RainbowKit, TanStack Query, Tailwind CSS
+- **Frontend**: Next.js 15, RainbowKit, Wagmi, TanStack Query, Tailwind CSS
 - **Contracts**: Stylus Rust (arkworks, Poseidon), Solidity (OpenZeppelin)
-- **Chain**: Arbitrum Sepolia + Orbit SDK (permissioned validators)
-- **Upgrades**: RIP-7212 precompile, Stylus Cache Manager
-- **Tools**: Foundry, cargo-stylus, Alchemy RPCs
+- **Chain**: Arbitrum Sepolia
+- **Wallet**: RainbowKit + WalletConnect
+- **Tools**: Foundry, cargo-stylus
 
 ---
 
@@ -129,7 +145,7 @@ arbshield/
 ├── app/                    # Next.js 15 app
 │   ├── (app)/verify/       # Verification flow (3 steps)
 │   ├── (app)/compliance/   # Compliance dashboard
-│   └── api/                # API routes
+│   └── page.tsx            # Landing page
 ├── components/             # React components
 │   ├── ui/                 # shadcn/ui components
 │   └── web/                # Landing page components
@@ -138,6 +154,9 @@ arbshield/
 │   ├── lib/verifier/       # Stylus Rust verifier
 │   └── script/             # Deployment scripts
 ├── lib/                    # Utilities & config
+│   ├── config.ts           # Wagmi/RainbowKit config
+│   ├── contracts.ts        # Contract addresses & ABIs
+│   └── types.ts            # TypeScript types
 └── public/                 # Static assets
 ```
 
@@ -195,7 +214,7 @@ forge script script/Deploy.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast
 
 ### Step 2: Generate ZK Proof
 - Select compliance attribute (credit score, accreditation, etc.)
-- Generate proof locally (no data leaves device)
+- Generate proof client-side (no data leaves device)
 - Proof size: ~256 bytes
 
 ### Step 3: Verify On-Chain
@@ -214,10 +233,11 @@ forge script script/Deploy.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast
 
 | Feature | ArbShield (Arbitrum) | Polygon ID / WorldID |
 |---------|---------------------|---------------------|
+| Architecture | Pure DApp (no backend) | Centralized components |
 | ZK Verification Gas | ~200k (Stylus) | High (EVM limits) |
 | Onboarding UX | FaceID/Passkey (RIP-7212) | Often seed phrases |
 | Repeat Verification | Near-instant (Cache Manager) | Standard |
-| Regulated Environment | Permissioned Orbit L3 | General chains |
+| Data Storage | Fully on-chain | Off-chain databases |
 
 ---
 
@@ -236,12 +256,13 @@ forge script script/Deploy.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast
 - Passkey authentication
 - Compliance dashboard
 - Mock BUIDL integration
+- Pure DApp architecture
 
 **Phase 2: Production (Q2 2026)**
 - Audit by Trail of Bits
 - Mainnet deployment
 - Real RWA integrations (BlackRock, Ondo)
-- Orbit L3 launch
+- Production ZK circuits
 
 **Phase 3: Scale (Q3 2026)**
 - HFT-scale compliance checks
@@ -265,4 +286,4 @@ MIT
 
 ---
 
-**ArbShield isn't just a hackathon project — it's the reference compliance layer for Arbitrum's institutional future. Let's make privacy the default for Wall Street onchain.** 🚀
+**ArbShield - The first pure DApp compliance layer for Arbitrum's institutional future. Fully decentralized, no backend, no database, just blockchain.** 🚀

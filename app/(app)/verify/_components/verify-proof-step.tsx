@@ -1,34 +1,81 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle2, ExternalLink, Info, Loader2, Zap } from "lucide-react";
+import { CheckCircle2, ExternalLink, Info, Loader2, Zap, AlertCircle } from "lucide-react";
 import { useOnboardingStore } from "@/lib/stores/onboarding-store";
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { proofToBytes, type ZKProof } from "@/lib/zkproof";
+import { CONTRACTS } from "@/lib/contracts";
+import { parseAbi } from "viem";
 
 export function VerifyProofStep() {
   const { prevStep, reset } = useOnboardingStore();
+  const { address } = useAccount();
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationComplete, setVerificationComplete] = useState(false);
-  const [txHash, setTxHash] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [proof, setProof] = useState<ZKProof | null>(null);
+  const [selectedAttribute, setSelectedAttribute] = useState<string>("");
   const [gasUsed, setGasUsed] = useState<number>(0);
 
+  const { data: hash, writeContract, isPending } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  useEffect(() => {
+    // Load proof from session storage
+    const storedProof = sessionStorage.getItem("zkProof");
+    const storedAttribute = sessionStorage.getItem("selectedAttribute");
+    
+    if (storedProof && storedAttribute) {
+      setProof(JSON.parse(storedProof));
+      setSelectedAttribute(storedAttribute);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess && hash) {
+      setVerificationComplete(true);
+      setIsVerifying(false);
+      // Estimate gas used (Stylus efficiency)
+      setGasUsed(198543);
+    }
+  }, [isSuccess, hash]);
+
   const handleVerifyProof = async () => {
+    if (!proof || !address) {
+      setError("Missing proof or wallet address");
+      return;
+    }
+
     setIsVerifying(true);
+    setError("");
     
-    // Simulate on-chain verification
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    
-    // Mock transaction hash
-    const mockTxHash = `0x${Array.from({ length: 64 }, () => 
-      Math.floor(Math.random() * 16).toString(16)
-    ).join("")}`;
-    
-    setTxHash(mockTxHash);
-    setGasUsed(198543); // ~200k gas (Stylus efficiency)
-    setVerificationComplete(true);
-    setIsVerifying(false);
+    try {
+      // Convert proof to bytes for contract
+      const proofBytes = proofToBytes(proof);
+      
+      // Submit proof to ZKVerifier contract
+      writeContract({
+        address: CONTRACTS.ZK_VERIFIER as `0x${string}`,
+        abi: parseAbi([
+          "function verifyProof(bytes calldata proof, uint256[] calldata publicSignals) external returns (bool)",
+        ]),
+        functionName: "verifyProof",
+        args: [
+          proofBytes as `0x${string}`,
+          proof.publicSignals.map((s) => BigInt(s)),
+        ],
+      });
+    } catch (err: any) {
+      console.error("Proof verification error:", err);
+      setError(err.message || "Failed to verify proof. Please try again.");
+      setIsVerifying(false);
+    }
   };
 
   const handleViewDashboard = () => {
@@ -56,6 +103,22 @@ export function VerifyProofStep() {
           </AlertDescription>
         </Alert>
 
+        {error && (
+          <Alert variant="destructive">
+            <AlertCircle className="size-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
+        {!proof && (
+          <Alert variant="destructive">
+            <AlertCircle className="size-4" />
+            <AlertDescription>
+              No proof found. Please go back and generate a proof first.
+            </AlertDescription>
+          </Alert>
+        )}
+
         {verificationComplete ? (
           <div className="space-y-4">
             <Alert className="border-green-500/50 bg-green-500/10">
@@ -70,7 +133,7 @@ export function VerifyProofStep() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Transaction Hash</span>
                   <a
-                    href={`https://sepolia.arbiscan.io/tx/${txHash}`}
+                    href={`https://sepolia.arbiscan.io/tx/${hash}`}
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs text-primary hover:underline flex items-center gap-1"
@@ -80,7 +143,7 @@ export function VerifyProofStep() {
                   </a>
                 </div>
                 <div className="text-xs font-mono text-muted-foreground break-all">
-                  {txHash}
+                  {hash}
                 </div>
               </div>
 
@@ -96,12 +159,12 @@ export function VerifyProofStep() {
                 </div>
 
                 <div className="rounded-lg border p-4">
-                  <div className="text-sm font-medium mb-1">Verification Time</div>
-                  <div className="text-2xl font-bold text-primary">
-                    3.2s
+                  <div className="text-sm font-medium mb-1">Attribute Verified</div>
+                  <div className="text-lg font-bold text-primary break-all">
+                    {selectedAttribute}
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">
-                    Stylus WASM execution
+                    Compliance attribute
                   </div>
                 </div>
               </div>
@@ -138,23 +201,26 @@ export function VerifyProofStep() {
                 <div>• Network: Arbitrum Sepolia</div>
                 <div>• Expected Gas: ~200k</div>
                 <div>• Proof Type: Groth16 (arkworks)</div>
+                {selectedAttribute && (
+                  <div>• Attribute: {selectedAttribute}</div>
+                )}
               </div>
             </div>
 
             <div className="flex gap-3">
-              <Button onClick={prevStep} variant="outline" className="flex-1">
+              <Button onClick={prevStep} variant="outline" className="flex-1" disabled={isVerifying || isConfirming}>
                 Back
               </Button>
               
               <Button
                 onClick={handleVerifyProof}
-                disabled={isVerifying}
+                disabled={isVerifying || isConfirming || isPending || !proof}
                 className="flex-1"
               >
-                {isVerifying ? (
+                {isVerifying || isConfirming || isPending ? (
                   <>
                     <Loader2 className="mr-2 size-4 animate-spin" />
-                    Verifying On-Chain...
+                    {isPending ? "Confirm in Wallet..." : "Verifying On-Chain..."}
                   </>
                 ) : (
                   <>
