@@ -27,13 +27,13 @@ contract MockBUIDL is ERC20, Ownable {
         address to,
         uint256 value
     ) internal virtual override {
-        // Skip compliance check for minting
-        if (from != address(0)) {
+        // Skip compliance check for minting and owner
+        if (from != address(0) && from != owner()) {
             require(isCompliant(from), "Sender not compliant");
         }
         
-        // Skip compliance check for burning
-        if (to != address(0)) {
+        // Skip compliance check for burning and owner
+        if (to != address(0) && to != owner()) {
             require(isCompliant(to), "Recipient not compliant");
         }
 

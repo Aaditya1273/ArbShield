@@ -1,0 +1,11 @@
+{
+  "name": "arbshield-contracts",
+  "version": "1.0.0",
+  "description": "ArbShield Smart Contracts Deployment",
+  "scripts": {
+    "deploy": "node deploy.js"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0"
+  }
+}

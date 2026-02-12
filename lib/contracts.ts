@@ -5,16 +5,16 @@
 
 export const CONTRACTS = {
   // Stylus Rust Verifier Contract (ZK Proof Verification)
-  ZKVerifier: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  ZK_VERIFIER: "0xEa53E2fF08CD18fD31B188a72079aE9Ca34856e4" as const,
   
   // Compliance Registry (stores verified attributes)
-  ComplianceRegistry: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  COMPLIANCE_REGISTRY: "0x464D37393C8D3991b493DBb57F5f3b8c31c7Fa60" as const,
   
   // Mock RWA Token (for demo BUIDL portal)
-  MockBUIDL: "0x0000000000000000000000000000000000000000" as const, // TODO: Deploy
+  MOCK_BUIDL: "0x15Ef1E2E5899dBc374e5D7e147d57Fd032912eDC" as const,
   
   // Passkey Verifier (RIP-7212 precompile)
-  PasskeyVerifier: "0x0000000000000000000000000000000000000100" as const, // RIP-7212 address
+  PASSKEY_VERIFIER: "0x0000000000000000000000000000000000000100" as const, // RIP-7212 address
 } as const;
 
 /**

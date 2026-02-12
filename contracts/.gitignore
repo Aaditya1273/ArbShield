@@ -1,0 +1,8 @@
+/node_modules
+
+prd.md
+.env
+resources/
+.env.local
+.next
+.vscode

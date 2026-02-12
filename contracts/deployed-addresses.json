@@ -1,0 +1,12 @@
+{
+  "network": "Arbitrum Sepolia",
+  "chainId": 421614,
+  "contracts": {
+    "ZKVerifier": "0xEa53E2fF08CD18fD31B188a72079aE9Ca34856e4",
+    "ComplianceRegistry": "0x464D37393C8D3991b493DBb57F5f3b8c31c7Fa60",
+    "MockBUIDL": "0x15Ef1E2E5899dBc374e5D7e147d57Fd032912eDC",
+    "StylusVerifier": "0x1111111111111111111111111111111111111111"
+  },
+  "deployer": "0x8bB9b052ad7ec275b46bfcDe425309557EFFAb07",
+  "timestamp": "2026-02-12T14:20:41.279Z"
+}
