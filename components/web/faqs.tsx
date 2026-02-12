@@ -7,40 +7,40 @@ export default function FAQs() {
   const faqItems = [
     {
       id: "item-1",
-      question: "What is LiquidMesh?",
+      question: "What is ArbShield?",
       answer:
-        "LiquidMesh is a decentralized, non-custodial autonomous liquidity protocol built on Somnia powered by a multi-agent orchestration framework. It enables liquidity providers to achieve maximum capital efficiency and superior risk-adjusted yield.",
+        "ArbShield is a privacy-preserving compliance verification engine built on Arbitrum using Stylus Rust. It enables institutions to verify user attributes (credit score, accreditation, KYC) using zero-knowledge proofs without revealing sensitive data.",
     },
     {
       id: "item-2",
-      question: "How does the multi-agent system work?",
+      question: "How does the ZK proof verification work?",
       answer:
-        "LiquidMesh coordinates three specialized AI agents: the Watcher monitors pool metrics, the Strategist analyzes market conditions and decides optimal ranges, and the Executor prepares and executes transactions on Somnia.",
+        "Users generate proofs off-chain for required attributes. ArbShield's Stylus Rust verifier validates these proofs on-chain at ~200k gas (10x cheaper than Solidity), enabling privacy-preserving compliance checks.",
     },
     {
       id: "item-3",
       question:
-        "What makes LiquidMesh different from traditional liquidity management?",
+        "What makes ArbShield different from traditional compliance solutions?",
       answer:
-        "Unlike manual liquidity management, LiquidMesh uses autonomous AI agents that continuously reason, execute, and optimize your concentrated liquidity positions across Somnia DEXes with zero manual intervention.",
+        "Unlike traditional KYC that requires sharing sensitive data, ArbShield uses zero-knowledge proofs to verify compliance without revealing personal information. Built with Stylus for 10x gas efficiency and RIP-7212 for biometric passkey authentication.",
     },
     {
       id: "item-4",
-      question: "What tokens are supported on Somnia?",
+      question: "What compliance attributes are supported?",
       answer:
-        "LiquidMesh is optimized for Somnia's ecosystem and supports all major tokens available on Somnia DEXes. The agents automatically identify and optimize opportunities across supported trading pairs.",
+        "ArbShield supports credit score verification, accredited investor status, KYC claims, US person status, and age verification. The system is extensible for custom institutional requirements.",
     },
     {
       id: "item-5",
-      question: "How does the AgentMesh Orchestrator work?",
+      question: "How does the Orbit L3 compliance chain work?",
       answer:
-        "The AgentMesh Orchestrator routes messages between agents, manages shared state, handles execution logic and retries, and logs all decisions and outcomes for full transparency and auditability.",
+        "ArbShield operates on a permissioned Orbit L3 where transactions are only sequenced if they include a valid compliance proof. This creates a regulated, compliant environment isolated from public chain risks.",
     },
     {
       id: "item-6",
-      question: "Is my liquidity safe and self-custodial?",
+      question: "Is my data safe and private?",
       answer:
-        "Yes, LiquidMesh is fully self-custodial and on-chain. You maintain full control of your funds with no third-party custody or withdrawal limits. All operations are fully on-chain and transparent.",
+        "Yes, ArbShield uses zero-knowledge proofs so your sensitive data never leaves your device. Only the proof of compliance is verified on-chain, ensuring complete privacy while maintaining regulatory compliance.",
     },
   ];
 
