@@ -1,47 +1,98 @@
-'use client'
+"use client";
 
-import { usePrivy } from '@privy-io/react-auth'
-import { ExitIcon } from '@radix-ui/react-icons'
-import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Button } from "@/components/ui/button";
 
-export const WalletConnect = () => {
-	const { login, logout, authenticated, user, ready } = usePrivy()
+export function WalletConnect() {
+  return (
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted,
+      }) => {
+        const ready = mounted && authenticationStatus !== "loading";
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus || authenticationStatus === "authenticated");
 
-	function handleDisconnect() {
-		logout()
-	}
+        return (
+          <div
+            {...(!ready && {
+              "aria-hidden": true,
+              style: {
+                opacity: 0,
+                pointerEvents: "none",
+                userSelect: "none",
+              },
+            })}
+          >
+            {(() => {
+              if (!connected) {
+                return (
+                  <Button
+                    onClick={openConnectModal}
+                    variant="gradient"
+                    size="default"
+                  >
+                    Connect Wallet
+                  </Button>
+                );
+              }
 
-	// Wait for Privy to check authentication state
-	if (!ready) {
-		return <Skeleton className="h-10 w-32 rounded-md" />
-	}
+              if (chain.unsupported) {
+                return (
+                  <Button onClick={openChainModal} variant="destructive">
+                    Wrong network
+                  </Button>
+                );
+              }
 
-	// If authenticated and user exists, show connected state
-  if (authenticated && user) {
-    const address = typeof user.wallet?.address === 'string' ? user.wallet.address : null
-		return (
-			<span className="flex items-center gap-x-2 font-medium">
-				<span className="hidden md:block">
-          {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connected'}
-				</span>
+              return (
+                <div className="flex gap-2">
+                  <Button
+                    onClick={openChainModal}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    {chain.hasIcon && (
+                      <div
+                        style={{
+                          background: chain.iconBackground,
+                          width: 16,
+                          height: 16,
+                          borderRadius: 999,
+                          overflow: "hidden",
+                        }}
+                      >
+                        {chain.iconUrl && (
+                          <img
+                            alt={chain.name ?? "Chain icon"}
+                            src={chain.iconUrl}
+                            style={{ width: 16, height: 16 }}
+                          />
+                        )}
+                      </div>
+                    )}
+                    {chain.name}
+                  </Button>
 
-				<button onClick={handleDisconnect} type="button" className="cursor-pointer">
-					<ExitIcon className="size-4" />
-				</button>
-			</span>
-		)
-	}
-
-	// Only show connect button if not authenticated
-	return (
-		<Button
-			onClick={login}
-			variant="gradient"
-			size="lg"
-			className="px-8 py-3 rounded-md text-base font-medium"
-		>
-			Connect Wallet
-		</Button>
-	)
+                  <Button onClick={openAccountModal} variant="gradient" size="sm">
+                    {account.displayName}
+                  </Button>
+                </div>
+              );
+            })()}
+          </div>
+        );
+      }}
+    </ConnectButton.Custom>
+  );
 }
