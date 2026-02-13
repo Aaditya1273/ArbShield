@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { WalletConnect } from "./wallet-connect";
 import { useAccount } from "wagmi";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 
 export default function AppHeader() {
   const router = useRouter();
+  const pathname = usePathname();
   const { isConnected } = useAccount();
 
   const handleProtectedNavigation = (path: string) => {
@@ -22,6 +23,8 @@ export default function AppHeader() {
     }
     router.push(path);
   };
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <header className="w-full">
@@ -40,18 +43,56 @@ export default function AppHeader() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => handleProtectedNavigation("/identity")}
+              className={`relative text-sm transition-colors font-medium ${
+                isActive("/identity")
+                  ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Identity
+            </button>
             <button
               onClick={() => handleProtectedNavigation("/verify")}
-              className="relative text-muted-foreground hover:text-foreground transition-colors font-medium"
+              className={`relative text-sm transition-colors font-medium ${
+                isActive("/verify")
+                  ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               Verify
             </button>
             <button
+              onClick={() => handleProtectedNavigation("/portal")}
+              className={`relative text-sm transition-colors font-medium ${
+                isActive("/portal")
+                  ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Portfolio
+            </button>
+            <button
               onClick={() => handleProtectedNavigation("/compliance")}
-              className="relative text-muted-foreground hover:text-foreground transition-colors font-medium"
+              className={`relative text-sm transition-colors font-medium ${
+                isActive("/compliance")
+                  ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               Dashboard
+            </button>
+            <button
+              onClick={() => handleProtectedNavigation("/analytics")}
+              className={`relative text-sm transition-colors font-medium ${
+                isActive("/analytics")
+                  ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Analytics
             </button>
           </div>
 

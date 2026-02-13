@@ -128,7 +128,7 @@ No other L2 combines these for institutional privacy at this efficiency.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack:
 
 - **Frontend**: Next.js 15, RainbowKit, Wagmi, TanStack Query, Tailwind CSS
 - **Contracts**: Stylus Rust (arkworks, Poseidon), Solidity (OpenZeppelin)
@@ -287,7 +287,7 @@ forge script script/Deploy.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast
 - **Live Demo**: [arbshield.vercel.app](https://arbshield.vercel.app)
 - **Video Demo**: [Watch Demo](https://youtu.be/...)
 - **Pitch Deck**: [View Presentation](https://docs.google.com/presentation/...)
-- **GitHub**: [github.com/yourusername/arbshield](https://github.com/yourusername/arbshield)
+- **GitHub**: [github.com/yourusername/arbshield](https://github.com/Aaditya1273/ArbShield)
 
 ---
 

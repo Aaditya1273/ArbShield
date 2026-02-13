@@ -25,7 +25,7 @@ export default function AppFooter() {
 						Docs
 					</Link>
 					<Link
-						href="https://github.com/yourusername/arbshield"
+						href="https://github.com/Aaditya1273/ArbShield"
 						target="_blank"
 						rel="noreferrer"
 						className="text-muted-foreground hover:text-foreground transition-colors"
