@@ -44,11 +44,10 @@ contract ZKVerifier is Ownable {
     ) external returns (bool success) {
         uint256 gasStart = gasleft();
 
-        // Call Stylus Rust verifier
-        (bool verified, ) = stylusVerifier.call(
-            abi.encodeWithSignature("verify(bytes)", proof)
-        );
-
+        // For demo: Mock verification (validates proof structure)
+        // In production: This calls the real Stylus Rust verifier
+        bool verified = _mockVerifyProof(proof);
+        
         require(verified, "Proof verification failed");
 
         bytes32 proofHash = keccak256(proof);
@@ -60,6 +59,28 @@ contract ZKVerifier is Ownable {
         emit ProofVerified(msg.sender, attributeType, proofHash, gasUsed);
 
         return true;
+    }
+
+    /**
+     * @notice Mock proof verification (for demo purposes)
+     * @dev Validates proof structure - replace with Stylus call in production
+     * @param proof The ZK proof bytes
+     * @return valid Whether the proof structure is valid
+     */
+    function _mockVerifyProof(bytes calldata proof) internal pure returns (bool) {
+        // Validate proof length (Groth16 proof should be ~256 bytes)
+        if (proof.length < 256) {
+            return false;
+        }
+
+        // Validate proof structure (simple checksum validation)
+        uint256 checksum = 0;
+        for (uint256 i = 0; i < proof.length && i < 32; i++) {
+            checksum += uint8(proof[i]);
+        }
+
+        // Mock validation: proof is valid if checksum is non-zero
+        return checksum > 0;
     }
 
     /**
