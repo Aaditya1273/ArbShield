@@ -5,7 +5,7 @@
 
 export const CONTRACTS = {
   // Stylus Rust Verifier Contract (ZK Proof Verification)
-  ZK_VERIFIER: "0xEa53E2fF08CD18fD31B188a72079aE9Ca34856e4" as const,
+  ZK_VERIFIER: "0xa2d6642f1f307a8144349d6fe2188bf764a08253" as const,
   
   // Compliance Registry (stores verified attributes)
   COMPLIANCE_REGISTRY: "0x464D37393C8D3991b493DBb57F5f3b8c31c7Fa60" as const,

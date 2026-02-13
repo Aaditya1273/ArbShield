@@ -199,20 +199,42 @@ Open http://localhost:3000
 
 ### 2. Smart Contracts
 
+#### Solidity Contracts (Compliance Registry)
+
 ```bash
 cd contracts
 
 # Build Solidity contracts
 forge build
 
-# Build Stylus Rust verifier
-cd lib/verifier
-cargo build --release --target wasm32-unknown-unknown
-cargo stylus check
-
 # Deploy to Arbitrum Sepolia
 forge script script/Deploy.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC --broadcast
 ```
+
+#### Stylus Rust Verifier (ZK Proof Verification)
+
+**Quick Deploy (3 commands):**
+
+```bash
+cd contracts/lib/verifier
+
+# 1. Configure
+cp .env.example .env
+# Edit .env with your private key
+
+# 2. Deploy
+./deploy.sh testnet
+
+# 3. Update frontend
+./update-frontend.sh <contract_address>
+```
+
+**Documentation:**
+- Quick Start: `contracts/lib/verifier/QUICKSTART.md`
+- Complete Guide: `STYLUS_COMPLETE_GUIDE.md`
+- Summary: `STYLUS_DEPLOYMENT_SUMMARY.md`
+
+See [Stylus Deployment Guide](STYLUS_DEPLOYMENT_GUIDE.md) for detailed instructions.
 
 ---
 
