@@ -31,7 +31,7 @@ export function PortalAccess() {
   const allRequirementsMet = requirements.every((req) => req.met);
 
   return (
-    <Card>
+    <Card className="transition-all duration-300 hover:shadow-lg hover:border-primary/30">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
@@ -44,11 +44,11 @@ export function PortalAccess() {
             </CardDescription>
           </div>
           {allRequirementsMet ? (
-            <Badge className="bg-green-500/10 text-green-500 border-green-500/20">
+            <Badge className="bg-green-500/10 text-green-500 border-green-500/20 transition-all duration-300 hover:scale-110">
               Access Granted
             </Badge>
           ) : (
-            <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">
+            <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 transition-all duration-300 hover:scale-110">
               Verification Required
             </Badge>
           )}
@@ -59,13 +59,13 @@ export function PortalAccess() {
           {requirements.map((req) => (
             <div
               key={req.name}
-              className="flex items-center justify-between p-4 rounded-lg border"
+              className="flex items-center justify-between p-4 rounded-lg border transition-all duration-300 hover:scale-[1.02] hover:shadow-md hover:border-primary/50"
             >
               <div className="flex items-center gap-3">
                 {req.met ? (
-                  <CheckCircle2 className="size-5 text-green-500" />
+                  <CheckCircle2 className="size-5 text-green-500 transition-all duration-300 hover:scale-110" />
                 ) : (
-                  <XCircle className="size-5 text-muted-foreground" />
+                  <XCircle className="size-5 text-muted-foreground transition-all duration-300 hover:scale-110" />
                 )}
                 <div>
                   <div className="font-medium">{req.name}</div>
@@ -80,7 +80,7 @@ export function PortalAccess() {
                 </Badge>
               ) : (
                 <Link href="/verify">
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" variant="outline" className="transition-all duration-300 hover:scale-105">
                     Verify Now
                     <ArrowRight className="size-4 ml-2" />
                   </Button>
@@ -90,7 +90,7 @@ export function PortalAccess() {
           ))}
 
           {!allRequirementsMet && (
-            <div className="mt-6 p-4 rounded-lg bg-muted/50 border border-dashed">
+            <div className="mt-6 p-4 rounded-lg bg-muted/50 border border-dashed transition-all duration-300 hover:bg-muted">
               <p className="text-sm text-muted-foreground">
                 Complete all required verifications to access the BUIDL Portal and interact with institutional RWA products.
               </p>

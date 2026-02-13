@@ -79,13 +79,16 @@ export function PortalStats() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
-        <Card key={stat.title}>
+        <Card 
+          key={stat.title}
+          className="transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-primary/50 cursor-pointer group"
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-            <stat.icon className={`size-4 ${stat.color}`} />
+            <stat.icon className={`size-4 ${stat.color} transition-all duration-300 group-hover:scale-110 group-hover:rotate-12`} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stat.value}</div>
+            <div className="text-2xl font-bold transition-all duration-300 group-hover:text-primary">{stat.value}</div>
             <p className="text-xs text-muted-foreground mt-1">{stat.change}</p>
           </CardContent>
         </Card>

@@ -2,15 +2,28 @@
 
 import { ThemeProvider } from "next-themes";
 import type React from "react";
+import { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { useAccount } from "wagmi";
 import AppFooter from "@/components/app-footer";
 import AppHeader from "@/components/app-header";
-// ProtectedRoute no longer used; pages handle auth gating at action level
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    // If user disconnects wallet while on a protected page, redirect to home
+    if (!isConnected && pathname !== "/") {
+      router.push("/");
+    }
+  }, [isConnected, pathname, router]);
+
   return (
     <ThemeProvider
       attribute="class"

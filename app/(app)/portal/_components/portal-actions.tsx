@@ -86,10 +86,10 @@ export function PortalActions() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {/* Mint BUIDL */}
-      <Card>
+      <Card className="transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-primary/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <ArrowDownToLine className="size-5" />
+            <ArrowDownToLine className="size-5 transition-all duration-300 group-hover:translate-y-1" />
             Mint BUIDL
           </CardTitle>
           <CardDescription>
@@ -106,10 +106,11 @@ export function PortalActions() {
               value={mintAmount}
               onChange={(e) => setMintAmount(e.target.value)}
               disabled={!canAccess}
+              className="transition-all duration-300 focus:scale-[1.02]"
             />
           </div>
           <Button
-            className="w-full"
+            className="w-full transition-all duration-300 hover:scale-105"
             onClick={handleMint}
             disabled={!canAccess || isPending || isConfirming}
           >
@@ -131,10 +132,10 @@ export function PortalActions() {
       </Card>
 
       {/* Redeem BUIDL */}
-      <Card>
+      <Card className="transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:border-primary/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <ArrowUpFromLine className="size-5" />
+            <ArrowUpFromLine className="size-5 transition-all duration-300 group-hover:-translate-y-1" />
             Redeem BUIDL
           </CardTitle>
           <CardDescription>
@@ -151,10 +152,11 @@ export function PortalActions() {
               value={redeemAmount}
               onChange={(e) => setRedeemAmount(e.target.value)}
               disabled={!canAccess}
+              className="transition-all duration-300 focus:scale-[1.02]"
             />
           </div>
           <Button
-            className="w-full"
+            className="w-full transition-all duration-300 hover:scale-105"
             variant="outline"
             onClick={handleRedeem}
             disabled={!canAccess || isPending || isConfirming}
@@ -177,7 +179,7 @@ export function PortalActions() {
       </Card>
 
       {/* Info Card */}
-      <Card className="md:col-span-2">
+      <Card className="md:col-span-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
         <CardHeader>
           <CardTitle>About BUIDL</CardTitle>
           <CardDescription>
@@ -194,7 +196,7 @@ export function PortalActions() {
               href={`https://sepolia.arbiscan.io/address/${CONTRACTS.MOCK_BUIDL}`}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-primary hover:underline flex items-center gap-1"
+              className="text-sm text-primary hover:underline flex items-center gap-1 transition-all duration-300 hover:gap-2"
             >
               View Contract
               <ExternalLink className="size-3" />
