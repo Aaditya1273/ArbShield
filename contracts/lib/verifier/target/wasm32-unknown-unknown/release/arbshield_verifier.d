@@ -1,0 +1,1 @@
+/home/arpit/Desktop/hackathon_projects/ArbShield/contracts/lib/verifier/target/wasm32-unknown-unknown/release/arbshield_verifier.wasm: /home/arpit/Desktop/hackathon_projects/ArbShield/contracts/lib/verifier/src/lib.rs
