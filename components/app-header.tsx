@@ -7,6 +7,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { WalletConnect } from "./wallet-connect";
 import { useAccount } from "wagmi";
 import { toast } from "sonner";
+import { User, Shield, Briefcase, BarChart3, Activity } from "lucide-react";
 
 export default function AppHeader() {
   const router = useRouter();
@@ -46,52 +47,77 @@ export default function AppHeader() {
           <div className="flex items-center gap-6">
             <button
               onClick={() => handleProtectedNavigation("/identity")}
-              className={`relative text-sm transition-colors font-medium ${
+              className={`group relative text-sm transition-all duration-300 font-medium flex items-center gap-2 ${
                 isActive("/identity")
                   ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:scale-105"
               }`}
             >
+              <User className={`size-4 transition-all duration-300 ${
+                isActive("/identity") 
+                  ? "text-primary" 
+                  : "group-hover:rotate-12 group-hover:text-primary"
+              }`} />
               Identity
             </button>
             <button
               onClick={() => handleProtectedNavigation("/verify")}
-              className={`relative text-sm transition-colors font-medium ${
+              className={`group relative text-sm transition-all duration-300 font-medium flex items-center gap-2 ${
                 isActive("/verify")
                   ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:scale-105"
               }`}
             >
+              <Shield className={`size-4 transition-all duration-300 ${
+                isActive("/verify") 
+                  ? "text-primary" 
+                  : "group-hover:scale-110 group-hover:text-primary"
+              }`} />
               Verify
             </button>
             <button
               onClick={() => handleProtectedNavigation("/portal")}
-              className={`relative text-sm transition-colors font-medium ${
+              className={`group relative text-sm transition-all duration-300 font-medium flex items-center gap-2 ${
                 isActive("/portal")
                   ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:scale-105"
               }`}
             >
+              <Briefcase className={`size-4 transition-all duration-300 ${
+                isActive("/portal") 
+                  ? "text-primary" 
+                  : "group-hover:-rotate-12 group-hover:text-primary"
+              }`} />
               Portfolio
             </button>
             <button
               onClick={() => handleProtectedNavigation("/compliance")}
-              className={`relative text-sm transition-colors font-medium ${
+              className={`group relative text-sm transition-all duration-300 font-medium flex items-center gap-2 ${
                 isActive("/compliance")
                   ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:scale-105"
               }`}
             >
+              <Activity className={`size-4 transition-all duration-300 ${
+                isActive("/compliance") 
+                  ? "text-primary" 
+                  : "group-hover:scale-110 group-hover:text-primary"
+              }`} />
               Dashboard
             </button>
             <button
               onClick={() => handleProtectedNavigation("/analytics")}
-              className={`relative text-sm transition-colors font-medium ${
+              className={`group relative text-sm transition-all duration-300 font-medium flex items-center gap-2 ${
                 isActive("/analytics")
                   ? "text-foreground after:absolute after:bottom-[-20px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:scale-105"
               }`}
             >
+              <BarChart3 className={`size-4 transition-all duration-300 ${
+                isActive("/analytics") 
+                  ? "text-primary" 
+                  : "group-hover:rotate-12 group-hover:text-primary"
+              }`} />
               Analytics
             </button>
           </div>
