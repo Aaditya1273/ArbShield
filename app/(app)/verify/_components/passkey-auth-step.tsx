@@ -169,24 +169,39 @@ export function PasskeyAuthStep() {
                 </AlertDescription>
               </Alert>
             ) : (
-              <Button
-                onClick={handlePasskeyAuth}
-                disabled={isAuthenticating || !webAuthnSupported}
-                className="w-full"
-                size="lg"
-              >
-                {isAuthenticating ? (
-                  <>
-                    <Loader2 className="mr-2 size-4 animate-spin" />
-                    Authenticating...
-                  </>
-                ) : (
-                  <>
-                    <Fingerprint className="mr-2 size-4" />
-                    {passkeyExists ? "Authenticate with Passkey" : "Register & Authenticate"}
-                  </>
-                )}
-              </Button>
+              <div className="space-y-2">
+                <Button
+                  onClick={handlePasskeyAuth}
+                  disabled={isAuthenticating || !webAuthnSupported}
+                  className="w-full"
+                  size="lg"
+                >
+                  {isAuthenticating ? (
+                    <>
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      Authenticating...
+                    </>
+                  ) : (
+                    <>
+                      <Fingerprint className="mr-2 size-4" />
+                      {passkeyExists ? "Authenticate with Passkey" : "Register & Authenticate"}
+                    </>
+                  )}
+                </Button>
+                
+                {/* Development Skip Button */}
+                <Button
+                  onClick={() => {
+                    setAuthSuccess(true);
+                    setTimeout(() => nextStep(), 500);
+                  }}
+                  variant="outline"
+                  className="w-full"
+                  size="sm"
+                >
+                  Skip (Development Only)
+                </Button>
+              </div>
             )}
 
             {platformAuthAvailable && !passkeyExists && (

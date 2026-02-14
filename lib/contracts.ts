@@ -13,6 +13,9 @@ export const CONTRACTS = {
   // Mock RWA Token (for demo BUIDL portal)
   MOCK_BUIDL: "0x15Ef1E2E5899dBc374e5D7e147d57Fd032912eDC" as const,
   
+  // Passkey Registry (multi-device passkey management)
+  PASSKEY_REGISTRY: "0xe047C063A0ed4ec577fa255De3456856e4455087" as const,
+  
   // Passkey Verifier (RIP-7212 precompile)
   PASSKEY_VERIFIER: "0x0000000000000000000000000000000000000100" as const, // RIP-7212 address
 } as const;

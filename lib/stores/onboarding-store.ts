@@ -22,6 +22,8 @@ interface OnboardingState {
 
   // Actions
   setCurrentStep: (step: number) => void;
+  nextStep: () => void;
+  prevStep: () => void;
   completeStep: (step: number) => void;
   setWsttAmount: (amount: string) => void;
   setUsdcAmount: (amount: string) => void;
@@ -56,6 +58,19 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
       completedSteps: state.completedSteps.includes(step - 1)
         ? state.completedSteps
         : [...state.completedSteps, step - 1],
+    })),
+
+  nextStep: () =>
+    set((state) => ({
+      currentStep: state.currentStep + 1,
+      completedSteps: state.completedSteps.includes(state.currentStep)
+        ? state.completedSteps
+        : [...state.completedSteps, state.currentStep],
+    })),
+
+  prevStep: () =>
+    set((state) => ({
+      currentStep: Math.max(1, state.currentStep - 1),
     })),
 
   completeStep: (step) =>
