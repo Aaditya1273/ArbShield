@@ -1,12 +1,18 @@
 [package]
 name = "arbshield-verifier"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 [dependencies]
 stylus-sdk = "0.6.0"
 alloy-primitives = "0.7.6"
 alloy-sol-types = "0.7.6"
+ark-bn254 = { version = "0.4.0", default-features = false, features = ["scalar_field"] }
+ark-ec = { version = "0.4.0", default-features = false }
+ark-ff = { version = "0.4.0", default-features = false }
+ark-serialize = { version = "0.4.0", default-features = false }
+ark-std = { version = "0.4.0", default-features = false }
+num-bigint = { version = "0.4", default-features = false }
 
 [dev-dependencies]
 tokio = { version = "1.12.0", features = ["full"] }
@@ -15,6 +21,8 @@ eyre = "0.6.8"
 
 [features]
 export-abi = ["stylus-sdk/export-abi"]
+default = ["std"]
+std = ["ark-std/std", "ark-bn254/std", "ark-ec/std", "ark-ff/std"]
 
 [lib]
 crate-type = ["lib", "cdylib"]
@@ -25,3 +33,4 @@ strip = true
 lto = true
 panic = "abort"
 opt-level = "z"
+

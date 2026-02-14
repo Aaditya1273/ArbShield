@@ -21,8 +21,8 @@ export function VerifyProofStep() {
   const [selectedAttribute, setSelectedAttribute] = useState<string>("");
   const [gasUsed, setGasUsed] = useState<number>(0);
 
-  const { data: hash, writeContract, isPending } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+  const { data: hash, writeContract, isPending, error: writeError } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess, error: txError } = useWaitForTransactionReceipt({
     hash,
   });
 
@@ -46,6 +46,20 @@ export function VerifyProofStep() {
     }
   }, [isSuccess, hash]);
 
+  // Handle transaction errors
+  useEffect(() => {
+    if (writeError) {
+      console.error("Write contract error:", writeError);
+      setError(`Transaction preparation failed: ${writeError.message}`);
+      setIsVerifying(false);
+    }
+    if (txError) {
+      console.error("Transaction error:", txError);
+      setError(`Transaction failed: ${txError.message}`);
+      setIsVerifying(false);
+    }
+  }, [writeError, txError]);
+
   const handleVerifyProof = async () => {
     if (!proof || !address || !selectedAttribute) {
       setError("Missing proof, wallet address, or attribute type");
@@ -56,28 +70,38 @@ export function VerifyProofStep() {
     setError("");
     
     try {
-      // Convert proof to bytes for contract
+      // Convert proof to bytes for Stylus contract
       const proofBytes = proofToBytes(proof);
       
-      console.log("Submitting proof:", {
+      // Prepare public inputs (for multiplier circuit: just the output c)
+      // In production: extract from proof.publicSignals
+      const publicInputs = proof.publicSignals.map((signal) => {
+        // Convert each signal to 32-byte hex
+        const bn = BigInt(signal);
+        const hex = bn.toString(16).padStart(64, '0');
+        return `0x${hex}`;
+      });
+      
+      console.log("Submitting to Stylus verifier:", {
         contract: CONTRACTS.ZK_VERIFIER,
         proofLength: proofBytes.length,
+        publicInputsCount: publicInputs.length,
         attributeType: selectedAttribute,
         proofPreview: proofBytes.slice(0, 66) + "...",
       });
       
-      // Submit proof to ZKVerifier contract with explicit gas limit
+      // Call Stylus contract directly: verify(bytes proof, bytes[] publicInputs)
       writeContract({
         address: CONTRACTS.ZK_VERIFIER as `0x${string}`,
         abi: parseAbi([
-          "function verifyProof(bytes calldata proof, string calldata attributeType) external returns (bool)",
+          "function verify(bytes calldata proof, bytes[] calldata publicInputs) external returns (bool)",
         ]),
-        functionName: "verifyProof",
+        functionName: "verify",
         args: [
           proofBytes as `0x${string}`,
-          selectedAttribute,
+          publicInputs as `0x${string}`[],
         ],
-        gas: 500000n, // Set explicit gas limit to prevent estimation errors
+        gas: 500000n,
       });
     } catch (err: any) {
       console.error("Proof verification error:", err);
