@@ -6,6 +6,10 @@
     "deploy": "node deploy.js"
   },
   "dependencies": {
+    "dotenv": "^17.3.1",
     "ethers": "^6.13.0"
+  },
+  "devDependencies": {
+    "solc": "^0.8.28"
   }
 }
