@@ -189,17 +189,17 @@ export function PasskeyAuthStep() {
                   )}
                 </Button>
                 
-                {/* Development Skip Button */}
+                {/* Development Skip Button - WebAuthn requires HTTPS */}
                 <Button
                   onClick={() => {
                     setAuthSuccess(true);
                     setTimeout(() => nextStep(), 500);
                   }}
                   variant="outline"
-                  className="w-full"
+                  className="w-full text-xs"
                   size="sm"
                 >
-                  Skip (Development Only)
+                  Skip Passkey Auth (Dev Mode - WebAuthn requires HTTPS)
                 </Button>
               </div>
             )}

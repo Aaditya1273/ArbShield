@@ -124,11 +124,14 @@ export async function verifyZKProofLocally(
  */
 export function proofToBytes(proof: ZKProof): string {
   // Flatten proof into bytes format for Solidity
+  // Remove "0x" prefix from each component before joining
+  const cleanHex = (hex: string) => hex.startsWith('0x') ? hex.slice(2) : hex;
+  
   const proofBytes = [
-    ...proof.proof.pi_a.slice(0, 2),
-    ...proof.proof.pi_b[0],
-    ...proof.proof.pi_b[1],
-    ...proof.proof.pi_c.slice(0, 2),
+    ...proof.proof.pi_a.slice(0, 2).map(cleanHex),
+    ...proof.proof.pi_b[0].map(cleanHex),
+    ...proof.proof.pi_b[1].map(cleanHex),
+    ...proof.proof.pi_c.slice(0, 2).map(cleanHex),
   ].join('');
 
   return `0x${proofBytes}`;

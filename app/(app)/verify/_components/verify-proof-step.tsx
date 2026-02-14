@@ -47,8 +47,8 @@ export function VerifyProofStep() {
   }, [isSuccess, hash]);
 
   const handleVerifyProof = async () => {
-    if (!proof || !address) {
-      setError("Missing proof or wallet address");
+    if (!proof || !address || !selectedAttribute) {
+      setError("Missing proof, wallet address, or attribute type");
       return;
     }
 
@@ -59,17 +59,18 @@ export function VerifyProofStep() {
       // Convert proof to bytes for contract
       const proofBytes = proofToBytes(proof);
       
-      // Submit proof to ZKVerifier contract
+      // Submit proof to ZKVerifier contract with explicit gas limit
       writeContract({
         address: CONTRACTS.ZK_VERIFIER as `0x${string}`,
         abi: parseAbi([
-          "function verifyProof(bytes calldata proof, uint256[] calldata publicSignals) external returns (bool)",
+          "function verifyProof(bytes calldata proof, string calldata attributeType) external returns (bool)",
         ]),
         functionName: "verifyProof",
         args: [
           proofBytes as `0x${string}`,
-          proof.publicSignals.map((s) => BigInt(s)),
+          selectedAttribute,
         ],
+        gas: 500000n, // Set explicit gas limit to prevent estimation errors
       });
     } catch (err: any) {
       console.error("Proof verification error:", err);
