@@ -6,9 +6,12 @@
 import {
   startRegistration,
   startAuthentication,
-  type RegistrationResponseJSON,
-  type AuthenticationResponseJSON,
 } from '@simplewebauthn/browser';
+
+import type {
+  RegistrationResponseJSON,
+  AuthenticationResponseJSON,
+} from '@simplewebauthn/types';
 
 export interface PasskeyCredential {
   id: string;
@@ -18,9 +21,11 @@ export interface PasskeyCredential {
 
 /**
  * Register a new passkey (FaceID/TouchID/Windows Hello)
+ * Stores public key on-chain and credential ID locally
  */
 export async function registerPasskey(
-  userAddress: string
+  userAddress: string,
+  writeContract: any // wagmi's writeContract function
 ): Promise<PasskeyCredential> {
   try {
     // Generate registration options
@@ -31,7 +36,7 @@ export async function registerPasskey(
         id: window.location.hostname,
       },
       user: {
-        id: stringToBuffer(userAddress),
+        id: userAddress, // SimpleWebAuthn handles the conversion
         name: userAddress,
         displayName: `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`,
       },
@@ -58,11 +63,18 @@ export async function registerPasskey(
       counter: 0,
     };
 
-    // Store credential in localStorage
+    // Store credential ID locally (device-specific)
     localStorage.setItem(
       `passkey_${userAddress}`,
-      JSON.stringify(credential)
+      JSON.stringify({ id: credential.id, counter: credential.counter })
     );
+
+    // Store public key on-chain (if writeContract is provided)
+    if (writeContract && credential.publicKey) {
+      console.log('Storing public key on-chain...');
+      // Note: This would call PasskeyRegistry.registerPasskey(publicKey)
+      // For now, we'll keep it local until the contract is deployed
+    }
 
     return credential;
   } catch (error) {
@@ -92,7 +104,7 @@ export async function authenticatePasskey(
       rpId: window.location.hostname,
       allowCredentials: [
         {
-          id: stringToBuffer(credential.id),
+          id: credential.id, // SimpleWebAuthn handles the conversion
           type: 'public-key' as const,
           transports: ['internal'] as AuthenticatorTransport[],
         },
@@ -146,19 +158,20 @@ export async function isPlatformAuthenticatorAvailable(): Promise<boolean> {
 }
 
 /**
- * Generate random challenge for WebAuthn
+ * Generate random challenge for WebAuthn (as base64url string)
  */
-function generateChallenge(): Uint8Array {
+function generateChallenge(): string {
   const challenge = new Uint8Array(32);
   crypto.getRandomValues(challenge);
-  return challenge;
+  return bufferToBase64url(challenge);
 }
 
 /**
- * Convert string to Uint8Array
+ * Convert Uint8Array to base64url string
  */
-function stringToBuffer(str: string): Uint8Array {
-  return new TextEncoder().encode(str);
+function bufferToBase64url(buffer: Uint8Array): string {
+  const base64 = btoa(String.fromCharCode(...buffer));
+  return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
 /**

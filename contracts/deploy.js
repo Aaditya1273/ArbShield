@@ -31,14 +31,16 @@ async function deploy() {
         const zkVerifierPath = path.join(__dirname, 'out/ZKVerifier.sol/ZKVerifier.json');
         const registryPath = path.join(__dirname, 'out/ComplianceRegistry.sol/ComplianceRegistry.json');
         const buidlPath = path.join(__dirname, 'out/MockBUIDL.sol/MockBUIDL.json');
+        const passkeyRegistryPath = path.join(__dirname, 'out/PasskeyRegistry.sol/PasskeyRegistry.json');
 
         const zkVerifierArtifact = JSON.parse(fs.readFileSync(zkVerifierPath, 'utf8'));
         const registryArtifact = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
         const buidlArtifact = JSON.parse(fs.readFileSync(buidlPath, 'utf8'));
+        const passkeyRegistryArtifact = JSON.parse(fs.readFileSync(passkeyRegistryPath, 'utf8'));
 
         // 1. Deploy ZKVerifier
         console.log('📝 Deploying ZKVerifier...');
-        const stylusVerifierPlaceholder = '0x1111111111111111111111111111111111111111';
+        const stylusVerifierAddress = '0xa2d6642f1f307a8144349d6fe2188bf764a08253';
         
         const ZKVerifierFactory = new ethers.ContractFactory(
             zkVerifierArtifact.abi,
@@ -46,7 +48,7 @@ async function deploy() {
             wallet
         );
         
-        const zkVerifier = await ZKVerifierFactory.deploy(stylusVerifierPlaceholder);
+        const zkVerifier = await ZKVerifierFactory.deploy(stylusVerifierAddress);
         await zkVerifier.waitForDeployment();
         const zkVerifierAddress = await zkVerifier.getAddress();
         console.log('✅ ZKVerifier deployed at:', zkVerifierAddress);
@@ -84,6 +86,19 @@ async function deploy() {
         const buidlAddress = await buidl.getAddress();
         console.log('✅ MockBUIDL deployed at:', buidlAddress);
 
+        // 5. Deploy PasskeyRegistry
+        console.log('\n📝 Deploying PasskeyRegistry...');
+        const PasskeyRegistryFactory = new ethers.ContractFactory(
+            passkeyRegistryArtifact.abi,
+            passkeyRegistryArtifact.bytecode.object,
+            wallet
+        );
+        
+        const passkeyRegistry = await PasskeyRegistryFactory.deploy();
+        await passkeyRegistry.waitForDeployment();
+        const passkeyRegistryAddress = await passkeyRegistry.getAddress();
+        console.log('✅ PasskeyRegistry deployed at:', passkeyRegistryAddress);
+
         // Summary
         console.log('\n' + '='.repeat(60));
         console.log('🎉 DEPLOYMENT COMPLETE!');
@@ -93,16 +108,19 @@ async function deploy() {
         console.log('ZKVerifier:         ', zkVerifierAddress);
         console.log('ComplianceRegistry: ', registryAddress);
         console.log('MockBUIDL:          ', buidlAddress);
+        console.log('PasskeyRegistry:    ', passkeyRegistryAddress);
+        console.log('StylusVerifier:     ', stylusVerifierAddress);
         console.log('\nNetwork: Arbitrum Sepolia (Chain ID: 421614)');
         console.log('Explorer: https://sepolia.arbiscan.io/');
         console.log('\nView contracts:');
         console.log('- ZKVerifier:          https://sepolia.arbiscan.io/address/' + zkVerifierAddress);
         console.log('- ComplianceRegistry:  https://sepolia.arbiscan.io/address/' + registryAddress);
         console.log('- MockBUIDL:           https://sepolia.arbiscan.io/address/' + buidlAddress);
+        console.log('- PasskeyRegistry:     https://sepolia.arbiscan.io/address/' + passkeyRegistryAddress);
+        console.log('- StylusVerifier:      https://sepolia.arbiscan.io/address/' + stylusVerifierAddress);
         console.log('\n📝 Next steps:');
         console.log('1. Update lib/contracts.ts with these addresses');
-        console.log('2. Deploy Stylus Rust verifier (optional)');
-        console.log('3. Test the frontend!');
+        console.log('2. Test the frontend!');
         console.log('='.repeat(60));
 
         // Save addresses to file
@@ -113,7 +131,8 @@ async function deploy() {
                 ZKVerifier: zkVerifierAddress,
                 ComplianceRegistry: registryAddress,
                 MockBUIDL: buidlAddress,
-                StylusVerifier: stylusVerifierPlaceholder
+                PasskeyRegistry: passkeyRegistryAddress,
+                StylusVerifier: stylusVerifierAddress
             },
             deployer: wallet.address,
             timestamp: new Date().toISOString()
