@@ -59,6 +59,13 @@ export function VerifyProofStep() {
       // Convert proof to bytes for contract
       const proofBytes = proofToBytes(proof);
       
+      console.log("Submitting proof:", {
+        contract: CONTRACTS.ZK_VERIFIER,
+        proofLength: proofBytes.length,
+        attributeType: selectedAttribute,
+        proofPreview: proofBytes.slice(0, 66) + "...",
+      });
+      
       // Submit proof to ZKVerifier contract with explicit gas limit
       writeContract({
         address: CONTRACTS.ZK_VERIFIER as `0x${string}`,

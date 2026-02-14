@@ -63,22 +63,23 @@ async function generateMockGroth16Proof(
   // Generate deterministic proof based on input
   const seed = hashInput(input);
 
+  // Generate proper 32-byte (64 hex chars) values for each component
   return {
     proof: {
       pi_a: [
         generateHex(seed, 64),
         generateHex(seed + 1, 64),
-        '1',
+        padHex('1', 64), // Pad to 64 hex chars
       ],
       pi_b: [
         [generateHex(seed + 2, 64), generateHex(seed + 3, 64)],
         [generateHex(seed + 4, 64), generateHex(seed + 5, 64)],
-        ['1', '0'],
+        [padHex('1', 64), padHex('0', 64)], // Pad to 64 hex chars
       ],
       pi_c: [
         generateHex(seed + 6, 64),
         generateHex(seed + 7, 64),
-        '1',
+        padHex('1', 64), // Pad to 64 hex chars
       ],
       protocol: 'groth16',
       curve: 'bn128',
@@ -222,6 +223,16 @@ function generateHex(seed: number, length: number): string {
     hex += (current % 16).toString(16);
   }
   return '0x' + hex;
+}
+
+/**
+ * Helper: Pad hex string to specified length (without 0x prefix)
+ */
+function padHex(value: string, length: number): string {
+  // Remove 0x if present
+  const cleanValue = value.startsWith('0x') ? value.slice(2) : value;
+  // Pad with zeros to reach desired length
+  return '0x' + cleanValue.padStart(length, '0');
 }
 
 /**
